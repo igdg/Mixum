@@ -1,0 +1,28 @@
+<div *ngIf="following.indexOf(item.user_id)!=-1">
+  <ion-item class="mar-top">
+    <ion-avatar item-left>
+      <img [src]="(user | async)?.photo || 'assets/img/profile.jpg'"/>
+    </ion-avatar>
+    <h2 (click)="openProfile(item.user_id)">{{(user | async)?.username}}</h2>
+  </ion-item>
+
+  <img src="{{item.image}}">
+  <div id="likes">
+    <a icon-only (click)="like(item.user_id, item.key)">
+      <ion-icon name="md-thumbs-up" color="primary" *ngIf="myLike"></ion-icon>
+      <ion-icon name="md-thumbs-up" color="dark" *ngIf="myLike == undefined"></ion-icon>
+    </a>
+    <span>{{countLikes}}
+<span *ngIf="countLikes == 1">like</span>
+<span *ngIf="countLikes > 1 || countLikes < 1">likes</span>
+</span>
+  </div>
+  <p>{{item.content}}</p>
+  <span>
+  <a color="secondary" (click)="verComentarios(item.key)">
+    {{commentsCount}}
+    <span *ngIf="commentsCount == 1">Comentario</span>
+    <span *ngIf="commentsCount > 1 || commentsCount < 1">Comentarios</span>
+  </a>
+</span>
+</div>

@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
-import * as firebase from 'firebase'
+import {IonicPage, NavController, NavParams, LoadingController, ToastController, MenuController} from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { UsersserviceProvider } from '../../providers/usersservice/usersservice'
 import { SignupPage } from '../signup/signup';
+import { ForgotPassword } from '../forgot-password/forgot-password';
+import {AngularFireAuth} from 'angularfire2/auth'
+import {User} from "../../models/User";
+import {errorHandler} from "@angular/platform-browser/src/browser";
 
 /**
  * Generated class for the LoginPage page.
@@ -20,48 +23,61 @@ import { SignupPage } from '../signup/signup';
 })
 export class LoginPage {
 
-  public email: string;
-  public password: string;
+  public user = {} as User;
+  passeye:string ='eye';
+  constructor(public usersService: UsersserviceProvider, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
+              public navCtrl: NavController, public navParams: NavParams, private afAuth: AngularFireAuth, public menu: MenuController) {
 
-  constructor(public usersService: UsersserviceProvider, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams) {
-    this.email = "email"
-    this.password = "pass"
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    //console.log('ionViewDidLoad LoginPage');
   }
 
-  submitLogin(){
-    var that = this;
-
-    var loader = this.loadingCtrl.create({
-      content: "Espera por favor..."
-    });
-    loader.present();
-
-    this.usersService.loginUserService(this.email, this.password).then(authData => {
-      //correcto
-      loader.dismiss();
-      that.navCtrl.setRoot(HomePage);
-    }, error => {
-      loader.dismiss();
-      let toast = this.toastCtrl.create({
-        message: error,
+  async login(user: User){
+    try{
+      if(user.email!=undefined && user.password!=undefined){
+        const result = await this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
+        if(result){
+          this.navCtrl.setRoot(HomePage);
+          this.menu.enable(true);
+        }
+      }else{
+        this.toastCtrl.create({
+          message: `Hay campos vacíos`,
+          duration: 3000,
+          cssClass: "toastError",
+        }).present();
+      }
+    }catch(err){
+      let msj = err.message;
+      switch (err.code){
+        case "auth/invalid-email":{
+          msj = "Correcto eléctronico inálido";
+          break;
+        }
+        case "auth/wrong-password":{
+          msj = "Datos incorrectos";
+          break;
+        }
+        case "auth/user-not-found": {
+          msj = "Datos incorrectos";
+          break;
+        }
+      }
+      this.toastCtrl.create({
+        message: msj,
         duration: 3000,
-        position: 'top'
-      });
-      toast.present();
-      that.password = ""
-    });
+        cssClass: "toastError",
+      }).present();
+    }
   }
 
   forgotPassword(){
-
+    this.navCtrl.push(ForgotPassword)
   }
 
-  redirectToSignup(){
-      this.navCtrl.push(SignupPage)
+  register(){
+    this.navCtrl.push(SignupPage)
   }
-
 }

@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle class="button-hover">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title text-center>Mixum</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="logout()" icon-only color="secondary" class="button-hover">
+        <ion-icon name="md-log-out"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h2 text-center class="primary-color">Siguiendo</h2>
+  <ion-refresher (ionRefresh)="doRefresh($event)" pulling-text="Pull To Refresh" refreshing-text="Fetching ..." refreshing-icon="loading-b">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      refreshingSpinner="circles"
+      refreshingText="..cargando">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-list class="mar-bot">
+    <!--<ion-list-header>Posts</ion-list-header>-->
+    <post-card-follow *ngFor="let item of postsList$ | async" [item]="item"></post-card-follow>
+  </ion-list>
+</ion-content>

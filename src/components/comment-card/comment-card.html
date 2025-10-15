@@ -1,0 +1,10 @@
+<!-- Generated template for the CommentCardComponent component -->
+<div>
+  <div class="area">
+    <img [src]="(user | async)?.photo || 'assets/img/profile.jpg'" class="img" (click)="openProfile(item.user_id)"/>
+    <span (click)="openProfile(item.user_id)" class="nombre content">{{(user | async)?.username}}</span>
+  </div>
+  <p class="italic">{{item.content}}</p>
+  <hr>
+  <br>
+</div>

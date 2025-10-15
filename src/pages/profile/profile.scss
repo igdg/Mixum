@@ -1,0 +1,32 @@
+page-profile {
+.aColor{
+  color: #550068;
+}
+  .img{
+    width: 150px;
+    height: 150px;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    box-shadow: 0 0 5px grey;
+  }
+
+  .card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    display:inline-block;
+    width: 40%;
+    margin: 5px;
+  }
+
+  .cBold{
+    font-weight: bold;
+  }
+
+  .toastError{
+    > div{
+      background-color: #f53d3d !important;
+    }
+    text-align:center;
+  }
+}

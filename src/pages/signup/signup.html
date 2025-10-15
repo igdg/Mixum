@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>Registrarse</ion-title>
   </ion-navbar>
 
@@ -14,25 +14,52 @@
 
 
 <ion-content padding>
-    <div class="splash-logo"></div>
-    <ion-list>
-      <ion-item>
-          <ion-label stacked>Nombre</ion-label>
-          <ion-input type="text" [(ngModel)]="name" name="name"></ion-input>
-      </ion-item>
+  <ion-list>
 
-      <ion-item>
-        <ion-label stacked>Email</ion-label>
-        <ion-input type="email" [(ngModel)]="email" name="email" placeholder="eg. john@doe.com"></ion-input>
-      </ion-item>
-      
-      <ion-item>
-        <ion-label stacked>Password</ion-label>
-        <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
-      </ion-item>
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type="email" [(ngModel)]="user.email" name="email" required="required"></ion-input>
+    </ion-item>
 
-      <div padding text-center>
-        <button ion-button color="danger" round (click)="doSignup()">Registrase</button>
-      </div>
-    </ion-list>
+    <ion-item>
+      <ion-label floating>Contraseña</ion-label>
+      <ion-input type="text" *ngIf="showPasswordText" [(ngModel)]="user.password" name="password" required="required"></ion-input>
+      <ion-input type="password" *ngIf="!showPasswordText" [(ngModel)]="user.password" name="password" required="required"></ion-input>
+      <!--<ion-input type="password" [(ngModel)]="user.password" name="password" required="required"></ion-input>-->
+      <button ion-button icon-only clear color="dark" type="button" item-right (click)="showPasswordText = !showPasswordText">
+        <ion-icon name="eye" *ngIf="!showPasswordText"> </ion-icon>
+        <ion-icon name="eye-off" *ngIf="showPasswordText"> </ion-icon>
+      </button>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Repetir Contraseña</ion-label>
+      <ion-input type="text" *ngIf="showRPasswordText" [(ngModel)]="repeatPass" name="repeatPassword" required="required"></ion-input>
+      <ion-input type="password" *ngIf="!showRPasswordText" [(ngModel)]="repeatPass" name="repeatPassword" required="required"></ion-input>
+      <!--<ion-input type="password" [(ngModel)]="repeatPass" name="repeatPassword" required="required"></ion-input>-->
+      <button ion-button icon-only clear color="dark" type="button" item-right (click)="showRPasswordText = !showRPasswordText">
+        <ion-icon name="eye" *ngIf="!showRPasswordText"> </ion-icon>
+        <ion-icon name="eye-off" *ngIf="showRPasswordText"> </ion-icon>
+      </button>
+    </ion-item>
+    <h4 text-center margin-top>Datos Personales</h4>
+    <ion-item>
+      <ion-label>Nombre de usuario</ion-label>
+      <ion-input [(ngModel)]="profile.username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Nombre</ion-label>
+      <ion-input [(ngModel)]="profile.firstName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Apellido</ion-label>
+      <ion-input [(ngModel)]="profile.lastName"></ion-input>
+    </ion-item>
+
+    <div padding text-center>
+      <button ion-button color="primary" round (click)="register(user)">Registrase</button>
+    </div>
+  </ion-list>
 </ion-content>

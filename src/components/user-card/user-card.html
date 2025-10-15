@@ -1,0 +1,8 @@
+<!-- Generated template for the UserCardComponent component -->
+<div>
+  <div class="area" (click)="openProfile(item.key)">
+    <img [src]="(user | async)?.photo || 'assets/img/profile.jpg'" class="img"/>
+    <span class="nombre content">{{(user | async)?.username}}</span>
+  </div>
+  <br>
+</div>

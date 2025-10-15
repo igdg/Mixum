@@ -1,0 +1,33 @@
+comment-card {
+  .img{
+    width: 30px;
+    height: 30px;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    box-shadow: 0 0 5px grey;
+  }
+
+  .nombre{
+    font-weight: bold;
+    font-size: 1em;
+  }
+
+  .area{
+    position:relative;
+    display:block;
+  }
+
+  .content {
+    position:absolute;
+    top:21%;
+    left:10%;
+  }
+
+  .italic{
+    font-style: italic;
+  }
+
+  .linea{
+    border-bottom: 1px solid lightgrey;
+  }
+}
