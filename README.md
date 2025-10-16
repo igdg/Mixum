@@ -4,7 +4,11 @@
 ## Descripción
 
 Mixum es una aplicación de una red social para dispositivos móviles con sistema operativo Android.
-Está creada para que los usuarios puedan subir fotografías y que estas fotografías puedan ser vistas por el resto. Además, los usuarios podrán interaccionar con ellas mediante el sistema de comentarios y votaciones
+Está creada para que los usuarios puedan subir fotografías y que estas fotografías puedan ser vistas por el resto. Además, los usuarios podrán interaccionar con ellas mediante el sistema de comentarios y votaciones.
+
+<p>
+  La aplicación está creada utilizando el framework Ionic en su versión 3.0 y Firebase para la autenticación, la base de datos y el almacenamiento imágenes.
+</p>
 
 ## Imágenes
 ### Vista de inicio de sesión
